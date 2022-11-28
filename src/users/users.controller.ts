@@ -46,7 +46,7 @@ export class UsersController {
     summary: 'Atualizar um usuário usuários',
   })
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+    return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
@@ -54,6 +54,6 @@ export class UsersController {
     summary: 'Deletar um usuário usuários',
   })
   remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+    return this.usersService.remove(id);
   }
 }
