@@ -1,7 +1,9 @@
+
+
 export class CreateUserDto {
-    nome: string;
+    name: string;
     nickname: string;
     email: string;
     password: string;
-    posts:string[];
+    
 }
