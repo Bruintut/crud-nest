@@ -6,26 +6,30 @@ import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  users: User[] = [];
+ 
   constructor(private readonly prisma: PrismaService) {}
 
-  create(createUserDto: CreateUserDto) {
+  create(createUserDto: CreateUserDto): Promise<User> {
     const user: User = {
-      id: 'random_id',
-
       ...createUserDto,
     };
 
-    this.users.push(user);
-    return 'This action adds a new user';
+    return this.prisma.user.create({
+      data: user,
+    });
+    
   }
 
-  findAll() {
-    return this.users;
+  findAll(): Promise<User[]> {
+    return this.prisma.user.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: string): Promise<User> {
+    return this.prisma.user.findUnique({
+      where:{
+        id,
+      }
+    });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
