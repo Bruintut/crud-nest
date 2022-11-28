@@ -11,13 +11,13 @@ datasource db {
 }
 
 model User{
-  id String @iddefault(uuid())
+  id String @id @default(uuid())
   name String
   nickname String
   email String @unique
   password String
 
   createdAt DateTime @default(now())
-  uptadeAt DateTime @uptadeAt
+  uptadeAt DateTime @updatedAt
   
 }
