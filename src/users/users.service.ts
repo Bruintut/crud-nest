@@ -10,12 +10,14 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 
+
 @Injectable()
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(dto: CreateUserDto): Promise<User> {
     const user: User = { ...dto };
+    console.log(user)
 
     return this.prisma.user.create({ data: user }).catch(this.handleError);
   }

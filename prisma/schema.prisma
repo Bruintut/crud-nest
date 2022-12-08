@@ -14,10 +14,11 @@ model User {
   id     String @id @default(uuid())
   name String    @unique
   nickname String @unique
-  cpf String
+  
   email String
   password String
   isAdmin Boolean
+ 
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
