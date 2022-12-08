@@ -14,7 +14,7 @@ import { User } from './entities/user.entity';
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(dto: CreateUserDto): Promise<User> {
+  async create(dto: CreateUserDto): Promise<User> {
     const user: User = { ...dto };
 
     return this.prisma.user.create({ data: user }).catch(this.handleError);

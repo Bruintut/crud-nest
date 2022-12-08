@@ -5,7 +5,7 @@ export class User {
     cpf: string;
     email: string;
     password: string;
-    role:string;
+    isAdmin?:boolean;
     
 
 }
