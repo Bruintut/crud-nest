@@ -5,10 +5,11 @@ import { UsersController } from './users/users.controller';
 import { UsersService } from './users/users.service';
 import { ProcfileModule } from './procfile/procfile.module';
 import { GameModule } from './game/game.module';
+import { GenderModule } from './gender/gender.module';
 
 
 @Module({
-  imports: [UsersModule, PrismaModule, ProcfileModule, GameModule],
+  imports: [UsersModule, PrismaModule, ProcfileModule, GameModule, GenderModule],
   controllers: [UsersController],
   providers: [UsersService],
 })
