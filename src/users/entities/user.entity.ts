@@ -6,6 +6,6 @@ export class User {
     nickname: string;    
     email: string;
     password: string;
-    procfile?: Procfile[];
     isAdmin: boolean;
+    procfile?: Procfile[];
 }

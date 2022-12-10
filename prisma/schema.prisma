@@ -16,8 +16,8 @@ model User {
   nickname String @unique
   email String
   password String
-  procfile Procfile[]
   isAdmin Boolean
+  procfile Procfile[]
  
 
   createdAt DateTime @default(now())
@@ -32,5 +32,4 @@ model Procfile{
   user User @relation(fields: [userId], references: [id])
   userId String
   
-
 }

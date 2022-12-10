@@ -3,6 +3,7 @@ import {
   NotFoundException,
   UnprocessableEntityException,
 } from '@nestjs/common';
+import { User } from '@prisma/client';
 import { error } from 'console';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateProcfileDto } from './dto/create-procfile.dto';
@@ -29,8 +30,12 @@ export class ProcfileService {
     return record;
   }
 
-  update(id: string, updateProcfileDto: UpdateProcfileDto) {
-    return `This action updates a #${id} procfile`;
+  async update(id: string, Dto: UpdateProcfileDto) {
+
+    await this.findOne(id);
+
+    return this.prisma.procfile.update({where: { id }, data: Dto }).catch(this.handleError);
+    
   }
 
   async delete(id: string) {
