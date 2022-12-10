@@ -13,12 +13,12 @@ import { Procfile } from './entities/procfile.entity';
 @Injectable()
 export class ProcfileService {
   constructor(private readonly prisma: PrismaService) {}
-  async create(Dto: CreateProcfileDto): Promise<Procfile> {
-    return this.prisma.procfile.create({ data: Dto }).catch(this.handleError);
+  async create(dto: CreateProcfileDto) {
+    return this.prisma.procfile.create({ data: dto }).catch(this.handleError);
   }
 
-  findAll(): Promise<Procfile[]> {
-    return this.prisma.procfile.findMany();
+  findAll() {
+    return this.prisma.procfile.findMany()
   }
 
   async findOne(id: string): Promise<Procfile> {
@@ -26,7 +26,6 @@ export class ProcfileService {
     if (!record) {
       throw new NotFoundException(`Registro com ID '${id}' não encontrado`);
     }
-
     return record;
   }
 
