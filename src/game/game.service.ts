@@ -29,7 +29,7 @@ export class GameService {
     await this.findOne(id)
 
     const data: Partial<Game>= {...dto} 
-    return this.prisma.game.update({where: {id}, data,}).catch(this.handleError);
+    return this.prisma.game.update({where: {id}, data: dto}).catch(this.handleError);
   }
 
   async delete(id: string) {
