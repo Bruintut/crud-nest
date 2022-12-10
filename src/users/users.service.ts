@@ -17,8 +17,6 @@ export class UsersService {
 
   async create(dto: CreateUserDto): Promise<User> {
     const user: User = { ...dto };
-    console.log(user)
-
     return this.prisma.user.create({ data: user }).catch(this.handleError);
   }
 
