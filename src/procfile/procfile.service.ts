@@ -1,4 +1,8 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { error } from 'console';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateProcfileDto } from './dto/create-procfile.dto';
@@ -9,18 +13,20 @@ import { Procfile } from './entities/procfile.entity';
 export class ProcfileService {
   constructor(private readonly prisma: PrismaService) {}
   async create(Dto: CreateProcfileDto): Promise<Procfile> {
-    const procfile: Procfile = { ...Dto };
-    return this.prisma.procfile
-      .create({ data: procfile })
-      .catch(this.handleError);
+    return this.prisma.procfile.create({ data: Dto }).catch(this.handleError);
   }
 
   findAll(): Promise<Procfile[]> {
     return this.prisma.procfile.findMany();
   }
 
-  findOne(id: string)  {
-    return `This action returns a #${id} procfile`;
+  async findOne(id: string): Promise<Procfile> {
+    const record = await this.prisma.procfile.findUnique({ where: { id } });
+    if (!record) {
+      throw new NotFoundException(`Registro com ID '${id}' não encontrado`);
+    }
+
+    return record;
   }
 
   update(id: string, updateProcfileDto: UpdateProcfileDto) {

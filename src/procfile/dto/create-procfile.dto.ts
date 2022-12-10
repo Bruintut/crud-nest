@@ -13,4 +13,8 @@ export class CreateProcfileDto {
     @ApiProperty({description: 'Url da imagem para o perfil!'})
     @IsString()
     imageUrl: string;
+
+    @ApiProperty({description: 'Id do User'})
+    @IsString()
+    userId: string;
 }

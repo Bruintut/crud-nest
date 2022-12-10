@@ -16,12 +16,14 @@ export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(dto: CreateUserDto): Promise<User> {
-    const user: User = { ...dto };
-    return this.prisma.user.create({ data: user }).catch(this.handleError);
+    
+    return this.prisma.user.create({ data: dto }).catch(this.handleError);
   }
 
   findAll(): Promise<User[]> {
+    console.log(User )
     return this.prisma.user.findMany();
+    
   }
 
   async findOne(id: string): Promise<User> {
@@ -35,10 +37,9 @@ export class UsersService {
 
   async update(id: string, dto: UpdateUserDto): Promise<User> {
     await this.findOne(id);
-    const data: Partial<User> = { ...dto };
-    return this.prisma.user.update({where: { id },data,});
-
     
+    return this.prisma.user.update({where: { id },data: dto});
+
   }
 
   async delete(id: string) {
