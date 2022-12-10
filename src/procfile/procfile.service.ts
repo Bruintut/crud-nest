@@ -3,7 +3,7 @@ import {
   NotFoundException,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { User } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import { error } from 'console';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { handleError } from 'src/utils/handle-error.utils';
@@ -15,7 +15,17 @@ import { Procfile } from './entities/procfile.entity';
 export class ProcfileService {
   constructor(private readonly prisma: PrismaService) {}
   async create(dto: CreateProcfileDto) {
-    return this.prisma.procfile.create({ data: dto }).catch(handleError);
+    const data: Prisma.ProcfileCreateInput = {
+      name: dto.name,
+      title: dto.title,
+      imageUrl: dto.imageUrl,
+      user: {
+        connect: {
+          id: dto.userId,
+        },
+      },
+    };
+    return this.prisma.procfile.create({ data }).catch(handleError);
   }
 
   findAll() {

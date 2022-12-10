@@ -16,13 +16,24 @@ export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(dto: CreateUserDto): Promise<User> {
-    
+    const data: User = {
+      ...dto,
+      password: await bcrypt.hash(dto.password, 10),};
+      
     return this.prisma.user.create({ data: dto }).catch(handleError);
   }
 
-  findAll(): Promise<User[]> {
-    return this.prisma.user.findMany();
-    
+  findAll() {
+    return this.prisma.user.findMany({
+      select: {
+        id: true,
+        name: true,
+        nickname: true,
+        email: true,
+        isAdmin: true,
+        password: false,
+      },
+    });
   }
 
   async findOne(id: string): Promise<User> {
