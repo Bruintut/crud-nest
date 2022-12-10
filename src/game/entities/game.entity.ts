@@ -12,4 +12,7 @@ export class Game extends CreateGameDto {
     trailerYouTubeUrl: string;
     gameplayYouTubeUrl: string;
     
+    procfiles?: Procfile[];
+    genders?: Gender[];
+
 }

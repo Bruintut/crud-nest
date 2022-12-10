@@ -7,5 +7,7 @@ export class Procfile extends CreateProcfileDto {
     name: string;
     title: string;
     imageUrl: string;
+    user?: User;
+    game?: Game[];
     
 }
