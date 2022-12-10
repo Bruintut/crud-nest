@@ -8,6 +8,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { handleError } from 'src/utils/handle-error.utils';
 
 
 @Injectable()
@@ -16,7 +17,7 @@ export class UsersService {
 
   async create(dto: CreateUserDto): Promise<User> {
     
-    return this.prisma.user.create({ data: dto }).catch(this.handleError);
+    return this.prisma.user.create({ data: dto }).catch(handleError);
   }
 
   findAll(): Promise<User[]> {
@@ -45,14 +46,5 @@ export class UsersService {
     await this.prisma.user.delete({ where: { id } });
   }
 
-  handleError(error: Error): undefined {
-    const errorLines = error.message?.split('\n');
-    const lastErrorLine = errorLines[errorLines.length - 1].trim();
-
-    if(!lastErrorLine){
-      console.log(error)
-    }
-
-    throw new UnprocessableEntityException(lastErrorLine || 'Algum error ocorreu');
-  }
+  
 }

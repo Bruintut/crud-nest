@@ -21,10 +21,6 @@ export class CreateUserDto {
   @MinLength(8)
   password: string;
 
-  @ApiProperty({ description: 'Confirmação de senha do Usuário' })
-  @IsString()
-  confirmPassword: string;
-
   @ApiProperty()
   @IsBoolean()
   isAdmin: boolean;

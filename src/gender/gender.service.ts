@@ -4,6 +4,7 @@ import {
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { handleError } from 'src/utils/handle-error.utils';
 import { CreateGenderDto } from './dto/create-gender.dto';
 import { UpdateGenderDto } from './dto/update-gender.dto';
 import { Gender } from './entities/gender.entity';
@@ -15,7 +16,7 @@ export class GenderService {
 
   async create(dto: CreateGenderDto): Promise<Gender> {
     
-    return this.prisma.gender.create({ data: dto }).catch(this.handleError);
+    return this.prisma.gender.create({ data: dto }).catch(handleError);
   }
 
   findAll(): Promise<Gender[]> {
@@ -44,14 +45,5 @@ export class GenderService {
     await this.prisma.gender.delete({ where: { id } });
   }
 
-  handleError(error: Error): undefined {
-    const errorLines = error.message?.split('\n');
-    const lastErrorLine = errorLines[errorLines.length - 1].trim();
-
-    if(!lastErrorLine){
-      console.log(error)
-    }
-
-    throw new UnprocessableEntityException(lastErrorLine || 'Algum error ocorreu');
-  }
+  
 }

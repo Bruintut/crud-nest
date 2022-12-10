@@ -6,6 +6,7 @@ import {
 import { User } from '@prisma/client';
 import { error } from 'console';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { handleError } from 'src/utils/handle-error.utils';
 import { CreateProcfileDto } from './dto/create-procfile.dto';
 import { UpdateProcfileDto } from './dto/update-procfile.dto';
 import { Procfile } from './entities/procfile.entity';
@@ -14,7 +15,7 @@ import { Procfile } from './entities/procfile.entity';
 export class ProcfileService {
   constructor(private readonly prisma: PrismaService) {}
   async create(dto: CreateProcfileDto) {
-    return this.prisma.procfile.create({ data: dto }).catch(this.handleError);
+    return this.prisma.procfile.create({ data: dto }).catch(handleError);
   }
 
   findAll() {
@@ -33,7 +34,7 @@ export class ProcfileService {
 
     await this.findOne(id);
 
-    return this.prisma.procfile.update({where: { id }, data: Dto }).catch(this.handleError);
+    return this.prisma.procfile.update({where: { id }, data: Dto }).catch(handleError);
     
   }
 
@@ -42,12 +43,4 @@ export class ProcfileService {
     await this.prisma.procfile.delete({ where: { id } });
   }
 
-  handleError(error: Error): undefined {
-    const errorLines = error.message?.split('\n');
-    const lastErrorLine = errorLines[errorLines.length - 1].trim();
-
-    throw new UnprocessableEntityException(
-      lastErrorLine || 'Algum error ocorreu',
-    );
-  }
 }
