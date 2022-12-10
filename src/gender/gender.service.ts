@@ -10,7 +10,7 @@ import { Gender } from './entities/gender.entity';
 
 
 @Injectable()
-export class GendersService {
+export class GenderService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(dto: CreateGenderDto): Promise<Gender> {
