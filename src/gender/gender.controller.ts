@@ -46,7 +46,7 @@ export class GenderController {
   @ApiOperation({
     summary: 'Deletar generos!',
   })
-  remove(@Param('id') id: string) {
-    return this.genderService.remove(id);
+  delete(@Param('id') id: string) {
+    return this.genderService.delete(id);
   }
 }
