@@ -1,26 +1,41 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
+import { Game } from './entities/game.entity';
 
 @Injectable()
 export class GameService {
-  create(createGameDto: CreateGameDto) {
-    return 'This action adds a new game';
+    constructor(private readonly prisma: PrismaService) {}
+  async create(dto: CreateGameDto) {
+    return this.prisma.game.create({data: dto}).catch(this.handleError);
+  }
+ 
+
+  findAll(): Promise<Game[]> {
+    return this.prisma.game.findMany();
   }
 
-  findAll() {
-    return `This action returns all game`;
+  async findOne(id: string) {
+
+    const shearch = await this.prisma.game.findUnique({where: {id}})
+    if(!shearch){
+      throw new NotFoundException(`Jogo com ID '${id}' não encontrado`)
+    }
+    return shearch;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} game`;
+  async update(id: string, dto: UpdateGameDto) {
+    await this.findOne(id)
+    return this.prisma.game.update({data: dto}).catch(this.handleError);
   }
 
-  update(id: number, updateGameDto: UpdateGameDto) {
-    return `This action updates a #${id} game`;
+  async delete(id: string) {
+    await this.findOne(id)
+    return this.prisma.game.delete({where: {id}}).catch(this.handleError);;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} game`;
+  handleError(error: Error): undefined {
+    throw new UnprocessableEntityException('Algum erro ocorreu');
   }
 }

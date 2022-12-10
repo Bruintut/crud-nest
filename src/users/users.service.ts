@@ -21,7 +21,6 @@ export class UsersService {
   }
 
   findAll(): Promise<User[]> {
-    console.log(User )
     return this.prisma.user.findMany();
     
   }
