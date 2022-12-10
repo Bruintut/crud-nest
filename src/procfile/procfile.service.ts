@@ -19,7 +19,7 @@ export class ProcfileService {
     return this.prisma.procfile.findMany();
   }
 
-  findOne(id: string) {
+  findOne(id: string)  {
     return `This action returns a #${id} procfile`;
   }
 
