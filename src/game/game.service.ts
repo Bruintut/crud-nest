@@ -25,9 +25,11 @@ export class GameService {
     return shearch;
   }
 
-  async update(id: string, dto: UpdateGameDto) {
+  async update(id: string, dto: UpdateGameDto): Promise<Game> {
     await this.findOne(id)
-    return this.prisma.game.update({data: dto}).catch(this.handleError);
+
+    const data: Partial<Game>= {...dto} 
+    return this.prisma.game.update({where: {id}, data,}).catch(this.handleError);
   }
 
   async delete(id: string) {

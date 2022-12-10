@@ -11,7 +11,5 @@ export class Game extends CreateGameDto {
     imdbScore: number;
     trailerYouTubeUrl: string;
     gameplayYouTubeUrl: string;
-    profile: Procfile[];
-
-    genders: Gender[];
+    
 }
