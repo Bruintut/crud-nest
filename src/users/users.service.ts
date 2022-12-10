@@ -3,8 +3,6 @@ import {
   NotFoundException,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { error } from 'console';
-import { userInfo } from 'os';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -49,6 +47,10 @@ export class UsersService {
   handleError(error: Error): undefined {
     const errorLines = error.message?.split('\n');
     const lastErrorLine = errorLines[errorLines.length - 1].trim();
+
+    if(!lastErrorLine){
+      console.log(error)
+    }
 
     throw new UnprocessableEntityException(lastErrorLine || 'Algum error ocorreu');
   }
