@@ -16,7 +16,7 @@ export class GenderService {
     return `This action returns a #${id} gender`;
   }
 
-  update(id: number, updateGenderDto: UpdateGenderDto) {
+  update(id: string, updateGenderDto: UpdateGenderDto) {
     return `This action updates a #${id} gender`;
   }
 
