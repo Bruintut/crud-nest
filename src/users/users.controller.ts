@@ -23,8 +23,7 @@ export class UsersController {
 
   @Get()
   @ApiOperation({
-    summary: 'Visualizar todos os usuários',
-  })
+    summary: 'Visualizar todos os usuários',  })
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   findAll() {
@@ -33,8 +32,7 @@ export class UsersController {
 
   @Get(':id')
   @ApiOperation({
-    summary: 'Visualizar um usuário',
-  })
+    summary: 'Visualizar um usuário',  })
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   findOne(@Param('id') id: string): Promise<User> {
@@ -43,16 +41,14 @@ export class UsersController {
 
   @Post()
   @ApiOperation({
-    summary: 'Criar um usuário usuários',
-  })
+    summary: 'Criar um usuário usuários',  })
   create(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.usersService.create(createUserDto);
   }
 
   @Patch(':id')
   @ApiOperation({
-    summary: 'Atualizar um usuário usuários',
-  })
+    summary: 'Atualizar um usuário usuários',  })
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
@@ -62,8 +58,7 @@ export class UsersController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({
-    summary: 'Deletar um usuário usuário',
-  })
+    summary: 'Deletar um usuário usuário',  })
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   delete(@Param('id') id: string) {
