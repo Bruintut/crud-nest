@@ -19,7 +19,7 @@ export class UsersService {
     const data: User = {
       ...dto,
       password: await bcrypt.hash(dto.password, 10),};
-      
+
     return this.prisma.user.create({ data: dto }).catch(handleError);
   }
 
@@ -47,8 +47,14 @@ export class UsersService {
 
   async update(id: string, dto: UpdateUserDto): Promise<User> {
     await this.findOne(id);
+
+    const data: Partial<User> = {...dto};
+
+    if(data.password){
+      data.password = await bcrypt.hash(data.password, 10);
+    }
     
-    return this.prisma.user.update({where: { id },data: dto});
+    return this.prisma.user.update({where: { id },data: dto}).catch(handleError);
 
   }
 
