@@ -1,11 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ProcfileService } from './procfile.service';
 import { CreateProcfileDto } from './dto/create-procfile.dto';
 import { UpdateProcfileDto } from './dto/update-procfile.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Procfile } from './entities/procfile.entity';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('procfile')
+@UseGuards(AuthGuard())
+@ApiBearerAuth()
 @Controller('procfile')
 export class ProcfileController {
   constructor(private readonly procfileService: ProcfileService) {}

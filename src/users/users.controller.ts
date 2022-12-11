@@ -8,12 +8,14 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { User } from './entities/user.entity';
+import { AuthGuard } from '@nestjs/passport';
 @ApiTags('user')
 @Controller('users')
 export class UsersController {
@@ -23,6 +25,8 @@ export class UsersController {
   @ApiOperation({
     summary: 'Visualizar todos os usuários',
   })
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   findAll() {
     return this.usersService.findAll();
   }
@@ -31,6 +35,8 @@ export class UsersController {
   @ApiOperation({
     summary: 'Visualizar um usuário',
   })
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   findOne(@Param('id') id: string): Promise<User> {
     return this.usersService.findOne(id);
   }
@@ -47,6 +53,8 @@ export class UsersController {
   @ApiOperation({
     summary: 'Atualizar um usuário usuários',
   })
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
@@ -56,6 +64,8 @@ export class UsersController {
   @ApiOperation({
     summary: 'Deletar um usuário usuário',
   })
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   delete(@Param('id') id: string) {
     this.usersService.delete(id);
   }
