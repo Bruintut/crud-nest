@@ -23,7 +23,7 @@ export class UsersController {
   @ApiOperation({
     summary: 'Visualizar todos os usuários',
   })
-  findAll(): Promise<User[]> {
+  findAll() {
     return this.usersService.findAll();
   }
 

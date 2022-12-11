@@ -15,7 +15,7 @@ import { handleError } from 'src/utils/handle-error.utils';
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(dto: CreateUserDto): Promise<User> {
+  async create(dto: CreateUserDto){
     const data: User = {
       ...dto,
       password: await bcrypt.hash(dto.password, 10),};
@@ -30,13 +30,14 @@ export class UsersService {
         name: true,
         nickname: true,
         email: true,
-        isAdmin: true,
         password: false,
+        isAdmin: true,
+        
       },
     });
   }
 
-  async findOne(id: string): Promise<User> {
+  async findOne(id: string) {
     const record = await this.prisma.user.findUnique({ where: { id } });
     if (!record) {
       throw new NotFoundException(`Registro com ID '${id}' não encontrado`);
@@ -45,7 +46,7 @@ export class UsersService {
     return record;
   }
 
-  async update(id: string, dto: UpdateUserDto): Promise<User> {
+  async update(id: string, dto: UpdateUserDto) {
     await this.findOne(id);
 
     const data: Partial<User> = {...dto};
