@@ -14,7 +14,7 @@ import { Procfile } from './entities/procfile.entity';
 @Injectable()
 export class ProcfileService {
   constructor(private readonly prisma: PrismaService) {}
-  async create(dto: CreateProcfileDto) {
+  async create(userId: string, dto: CreateProcfileDto) {
     const data: Prisma.ProcfileCreateInput = {
       name: dto.name,
       title: dto.title,

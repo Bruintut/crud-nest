@@ -5,6 +5,8 @@ import { UpdateProcfileDto } from './dto/update-procfile.dto';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Procfile } from './entities/procfile.entity';
 import { AuthGuard } from '@nestjs/passport';
+import { LoggedUser } from 'src/auth/logged-user.decorator';
+import { User } from 'src/users/entities/user.entity';
 
 @ApiTags('procfile')
 @UseGuards(AuthGuard())
@@ -23,8 +25,8 @@ export class ProcfileController {
   @ApiOperation({
     summary: 'Criar um novo perfil!',
   })
-  create(@Body() createProcfileDto: CreateProcfileDto): Promise<Procfile> {
-    return this.procfileService.create(createProcfileDto);
+  create(@LoggedUser() user: User, @Body() createProcfileDto: CreateProcfileDto): Promise<Procfile> {
+    return this.procfileService.create(user.id, createProcfileDto);
   }
 
   
