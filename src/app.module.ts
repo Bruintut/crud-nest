@@ -10,7 +10,7 @@ import { AuthModule } from './auth/auth.module';
 
 
 @Module({
-  imports: [AuthModule, UsersModule,  PrismaModule, ProcfileModule, GameModule, GenderModule],
+  imports: [PrismaModule, AuthModule, UsersModule,  ProcfileModule, GameModule, GenderModule],
   controllers: [UsersController],
   providers: [UsersService],
 })
