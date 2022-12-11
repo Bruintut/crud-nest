@@ -6,10 +6,11 @@ import { UsersService } from './users/users.service';
 import { ProcfileModule } from './procfile/procfile.module';
 import { GameModule } from './game/game.module';
 import { GenderModule } from './gender/gender.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
-  imports: [UsersModule, PrismaModule, ProcfileModule, GameModule, GenderModule],
+  imports: [UsersModule, PrismaModule, ProcfileModule, GameModule, GenderModule, AuthModule],
   controllers: [UsersController],
   providers: [UsersService],
 })
