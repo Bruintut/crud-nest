@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "User" (
+CREATE TABLE "Users" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "nickname" TEXT NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE "User" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Users_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -58,10 +58,10 @@ CREATE TABLE "_GameToGender" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_name_key" ON "User"("name");
+CREATE UNIQUE INDEX "Users_name_key" ON "Users"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_nickname_key" ON "User"("nickname");
+CREATE UNIQUE INDEX "Users_nickname_key" ON "Users"("nickname");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Game_title_key" ON "Game"("title");
@@ -82,7 +82,7 @@ CREATE UNIQUE INDEX "_GameToGender_AB_unique" ON "_GameToGender"("A", "B");
 CREATE INDEX "_GameToGender_B_index" ON "_GameToGender"("B");
 
 -- AddForeignKey
-ALTER TABLE "Procfile" ADD CONSTRAINT "Procfile_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Procfile" ADD CONSTRAINT "Procfile_userId_fkey" FOREIGN KEY ("userId") REFERENCES "Users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_GameToProcfile" ADD CONSTRAINT "_GameToProcfile_A_fkey" FOREIGN KEY ("A") REFERENCES "Game"("id") ON DELETE CASCADE ON UPDATE CASCADE;
