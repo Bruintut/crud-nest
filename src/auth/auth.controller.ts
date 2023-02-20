@@ -20,7 +20,7 @@ export class AuthController {
     return this.authService.login(loginDto)
   }
 
-  
+  @ApiTags('auth')
   @Get()
   @UseGuards(AuthGuard())
   @ApiOperation({summary: 'Retorna o usuário autenticado no momento'})

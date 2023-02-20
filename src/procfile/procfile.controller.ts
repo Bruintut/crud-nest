@@ -8,7 +8,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { LoggedUser } from 'src/auth/logged-user.decorator';
 import { User } from 'src/users/entities/user.entity';
 
-@ApiTags('procfile')
+@ApiTags('profile')
 @UseGuards(AuthGuard())
 @ApiBearerAuth()
 @Controller('procfile')

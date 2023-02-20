@@ -5,7 +5,7 @@ import { UpdateGenderDto } from './dto/update-gender.dto';
 import { ApiBearerAuth, ApiOperation, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
-@ApiTags('Gender')
+@ApiTags('Gener')
 @UseGuards(AuthGuard())
 @ApiBearerAuth()
 @Controller('gender')
